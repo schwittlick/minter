@@ -61,7 +61,7 @@ const askConfigQuestions = (): Promise<ConfigInput> => {
     {
       name: 'network',
       type: 'list',
-      choices: ['Mainnet', 'Florencenet'],
+      choices: ['Mainnet', 'Florencenet', 'Hangzhounet'],
       message: 'Select the network to deploy OpenMinter contracts to:',
       filter: function (val: string) {
         return val.toLowerCase();
@@ -86,6 +86,12 @@ const askConfigQuestions = (): Promise<ConfigInput> => {
             "https://florencenet.smartpy.io",
             "https://api.tez.ie/rpc/florencenet",
             "https://testnet-tezos.giganode.io",
+            "Other"
+          ]
+        }
+        else if (input.network === "hangzhounet") {
+          rpcOpts = [
+            "https://rpc.hangzhounet.teztnets.xyz",
             "Other"
           ]
         }
@@ -192,7 +198,7 @@ const saveConfig = (input: ConfigInput) => {
   config.set('rpc', input.rpc === "Other" ? input.rpcCustom : input.rpc);
   config.set('bcd.api', "https://api.better-call.dev");
   config.set('bcd.gui', "https://better-call.dev");
-  config.set('tzkt.api', input.network === "mainnet" ? "https://api.mainnet.tzkt.io" : "https://api.florencenet.tzkt.io");
+  config.set('tzkt.api', input.network === "mainnet" ? "https://api.mainnet.tzkt.io" : "https://api.hangzhou2net.tzkt.io");
   config.set('admin.address', input.adminPkh);
   config.set('admin.secret', input.adminSk);
   config.set('ipfsApi', "https://minter-api.tqhosted.com");
